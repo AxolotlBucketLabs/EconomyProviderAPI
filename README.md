@@ -9,10 +9,6 @@ Economy provider interface and DevTools virion for PocketMine-MP plugins
 
 The repository contains the `EconomyProviderAPI` virion, a companion plugin for server installation, and a small example.
 
-## Migration from previous versions
-
-Version 3.0.0 renames the virion, entry class, and PHP namespace. Change `devtools.yml` from `EcoAPI` to `EconomyProviderAPI`, update imports from `AxolotlBucketLabs\EcoAPI\` to `AxolotlBucketLabs\EconomyProviderAPI\`, and replace `EcoAPI::` calls with `EconomyProviderAPI::`. The Composer package is `axolotlbucketlabs/economy-provider-api`. If upgrading from 1.x, replace the old `nhanaz/ecoapi` package with this package.
-
 ## Compatibility and providers
 
 `virion.yml` and `plugin.yml` declare minimum API `5.0.0`, and Composer requires PHP `^8.1`. The [build workflow](.github/workflows/ci.yml) checks a pinned Axolotl-PM revision and the `5.0.0` API floor. The full Axolotl-PM 5.x range has not been verified.
