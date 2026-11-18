@@ -15,9 +15,9 @@ The repository contains the `EconomyProviderAPI` virion, a companion plugin for 
 
 | Provider | Registration names | Runtime requirement |
 |---|---|---|
+| **[SimpleEconomy](https://github.com/AxolotlBucketLabs/SimpleEconomy) (recommended)** | `simpleeconomy`, `simple` | An enabled SimpleEconomy plugin |
 | [EconomyAPI](https://github.com/ACM-PocketMine-MP/EconomyAPI) | `economyapi`, `economy` | An enabled compatible EconomyAPI plugin |
 | [BedrockEconomy](https://github.com/cooldogepm/BedrockEconomy) | `bedrockeconomy`, `bedrock` | An enabled compatible BedrockEconomy plugin |
-| [SimpleEconomy](https://github.com/AxolotlBucketLabs/SimpleEconomy) | `simpleeconomy`, `simple` | An enabled SimpleEconomy plugin |
 | Player XP levels | `xp`, `exp`, `experience` | No economy plugin |
 
 EconomyProviderAPI can select an external provider only after its plugin is enabled. Declare optional providers in `softdepend` when selecting one during `onEnable()`. The example falls back to built-in XP.
