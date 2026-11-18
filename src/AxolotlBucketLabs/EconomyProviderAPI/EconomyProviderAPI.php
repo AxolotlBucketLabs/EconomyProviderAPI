@@ -1,7 +1,7 @@
 <?php
 
 /*
- * EcoAPI - Simple and unified economy API for PocketMine-MP
+ * EconomyProviderAPI - Simple and unified economy API for PocketMine-MP
  *
  * Licensed under the Apache License, Version 2.0
  * https://www.apache.org/licenses/LICENSE-2.0
@@ -9,30 +9,30 @@
 
 declare(strict_types=1);
 
-namespace AxolotlBucketLabs\EcoAPI;
+namespace AxolotlBucketLabs\EconomyProviderAPI;
 
 use Closure;
-use AxolotlBucketLabs\EcoAPI\exception\MissingProviderDependencyException;
-use AxolotlBucketLabs\EcoAPI\exception\UnknownProviderException;
-use AxolotlBucketLabs\EcoAPI\provider\BedrockEconomyProvider;
-use AxolotlBucketLabs\EcoAPI\provider\EconomyAPIProvider;
-use AxolotlBucketLabs\EcoAPI\provider\SimpleEconomyProvider;
-use AxolotlBucketLabs\EcoAPI\provider\XPProvider;
+use AxolotlBucketLabs\EconomyProviderAPI\exception\MissingProviderDependencyException;
+use AxolotlBucketLabs\EconomyProviderAPI\exception\UnknownProviderException;
+use AxolotlBucketLabs\EconomyProviderAPI\provider\BedrockEconomyProvider;
+use AxolotlBucketLabs\EconomyProviderAPI\provider\EconomyAPIProvider;
+use AxolotlBucketLabs\EconomyProviderAPI\provider\SimpleEconomyProvider;
+use AxolotlBucketLabs\EconomyProviderAPI\provider\XPProvider;
 use function spl_object_id;
 
 /**
- * Main entry point for EcoAPI.
+ * Main entry point for EconomyProviderAPI.
  *
  * Provides a unified interface to multiple economy plugins.
- * Call EcoAPI::init() once in your plugin's onEnable(), then use
+ * Call EconomyProviderAPI::init() once in your plugin's onEnable(), then use
  * detectProvider() or getProvider() to get an EconomyProvider instance.
  *
  * Usage:
- *   EcoAPI::init();
- *   $provider = EcoAPI::detectProvider();
+ *   EconomyProviderAPI::init();
+ *   $provider = EconomyProviderAPI::detectProvider();
  *   $provider->getMoney($player, function(float|int $balance): void { ... });
  */
-final class EcoAPI {
+final class EconomyProviderAPI {
 
 	/**
 	 * @var array<string, array{factory: Closure(): EconomyProvider, available: Closure(): bool}>
@@ -48,7 +48,7 @@ final class EcoAPI {
 	}
 
 	/**
-	 * Initialize EcoAPI with built-in providers.
+	 * Initialize EconomyProviderAPI with built-in providers.
 	 *
 	 * Call this once in your plugin's onEnable().
 	 * Safe to call multiple times - subsequent calls are ignored.
@@ -88,7 +88,7 @@ final class EcoAPI {
 	 * Names are case-insensitive.
 	 *
 	 * Example:
-	 *   EcoAPI::registerProvider(
+	 *   EconomyProviderAPI::registerProvider(
 	 *       static fn(): EconomyProvider => new MyProvider(),
 	 *       static fn(): bool => MyProvider::isAvailable(),
 	 *       "myprovider", "myeco"

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * EcoAPI - Simple and unified economy API for PocketMine-MP plugins
+ * EconomyProviderAPI - Simple and unified economy API for PocketMine-MP plugins
  *
  * Licensed under the Apache License, Version 2.0
  * https://www.apache.org/licenses/LICENSE-2.0
@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace AxolotlBucketLabs\EcoAPI\provider;
+namespace AxolotlBucketLabs\EconomyProviderAPI\provider;
 
 use Closure;
 use WeakMap;
@@ -20,7 +20,7 @@ use pocketmine\event\Listener;
 use pocketmine\Server;
 
 /**
- * Maps synchronous BedrockEconomy cancellation events to EcoAPI failure callbacks.
+ * Maps synchronous BedrockEconomy cancellation events to EconomyProviderAPI failure callbacks.
  */
 final class BedrockEconomyCancellationListener implements Listener {
 

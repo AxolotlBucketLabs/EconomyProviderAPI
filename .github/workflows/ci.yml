@@ -16,7 +16,7 @@ jobs:
     name: Analyze and build EconomyProviderAPI
     runs-on: ubuntu-24.04
     steps:
-      - name: Check out EcoAPI
+      - name: Check out EconomyProviderAPI
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Check out pinned Axolotl-PM source
@@ -84,7 +84,7 @@ jobs:
         run: composer install --no-dev --no-interaction --prefer-dist --no-progress
         working-directory: .devtools-dependencies/axolotl-pm-api-floor
 
-      - name: Analyze EcoAPI and example at PHPStan max
+      - name: Analyze EconomyProviderAPI and example at PHPStan max
         run: composer phpstan
 
       - name: Test provider money handling
@@ -114,18 +114,18 @@ jobs:
           BUILD_METADATA: ${{ steps.build.outputs.metadata }}
         run: |
           set -euo pipefail
-          php -r '$p=new Phar(getenv("PHAR_PATH")); foreach(["plugin.yml","LICENSE","src/AxolotlBucketLabs/EcoAPI/EcoAPI.php","src/AxolotlBucketLabs/EcoAPI/provider/XPProvider.php"] as $f){if(!$p->offsetExists($f)){throw new RuntimeException("Missing PHAR entry: ".$f);}} $m=json_decode(file_get_contents(getenv("BUILD_METADATA")),true,512,JSON_THROW_ON_ERROR); if(hash_file("sha256",getenv("PHAR_PATH"))!==$m["data"]["sha256"]){throw new RuntimeException("PHAR digest mismatch");}'
+          php -r '$p=new Phar(getenv("PHAR_PATH")); foreach(["plugin.yml","LICENSE","src/AxolotlBucketLabs/EconomyProviderAPI/EconomyProviderAPI.php","src/AxolotlBucketLabs/EconomyProviderAPI/provider/XPProvider.php"] as $f){if(!$p->offsetExists($f)){throw new RuntimeException("Missing PHAR entry: ".$f);}} $m=json_decode(file_get_contents(getenv("BUILD_METADATA")),true,512,JSON_THROW_ON_ERROR); if(hash_file("sha256",getenv("PHAR_PATH"))!==$m["data"]["sha256"]){throw new RuntimeException("PHAR digest mismatch");}'
           cp "$BUILD_METADATA" build/devtools-build.json
 
-      - name: Prepare EcoAPI virion for consumer build
+      - name: Prepare EconomyProviderAPI virion for consumer build
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p .devtools-virions/EcoAPI
-          cp virion.yml LICENSE .devtools-virions/EcoAPI/
-          cp -R src .devtools-virions/EcoAPI/
+          mkdir -p .devtools-virions/EconomyProviderAPI
+          cp virion.yml LICENSE .devtools-virions/EconomyProviderAPI/
+          cp -R src .devtools-virions/EconomyProviderAPI/
 
-      - name: Build example with shaded EcoAPI
+      - name: Build example with shaded EconomyProviderAPI
         id: example-build
         uses: AxolotlBucketLabs/DevTools@38076540e62b84a1016eda5345d394e8d4c50b28 # v4.1.0
         with:
@@ -135,7 +135,7 @@ jobs:
           phpstan: max
           phpstan-server: .devtools-dependencies/axolotl-pm
           phpstan-paths: |
-            .devtools-virions/EcoAPI/src
+            .devtools-virions/EconomyProviderAPI/src
             .devtools-dependencies/SimpleEconomy/src
             .devtools-dependencies/BedrockEconomy/src
             .devtools-dependencies/EconomyAPI/src
@@ -168,7 +168,7 @@ jobs:
       - name: Upload verified PHAR
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: EcoAPI-${{ github.sha }}
+          name: EconomyProviderAPI-${{ github.sha }}
           path: |
             ${{ steps.build.outputs.phar }}
             ${{ steps.example-build.outputs.phar }}

@@ -1,7 +1,7 @@
-name: EcoAPIPlugin
-version: 2.0.0
-main: AxolotlBucketLabs\EcoAPI\Plugin\Main
+name: EconomyProviderAPIPlugin
+version: 3.0.0
+main: AxolotlBucketLabs\EconomyProviderAPI\Plugin\Main
 api: 5.0.0
-description: Companion plugin for EcoAPI virion library
+description: Companion plugin for EconomyProviderAPI virion library
 author: NhanAZ
 authors: [AxolotlBucketLabs]

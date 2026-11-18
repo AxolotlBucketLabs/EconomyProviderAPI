@@ -1,20 +1,20 @@
 <?php
 
 /*
- * EcoAPIExample - Simple example plugin demonstrating EcoAPI usage.
+ * EconomyProviderAPIExample - Simple example plugin demonstrating EconomyProviderAPI usage.
  *
  * This plugin shows how to:
- * 1. Initialize EcoAPI
+ * 1. Initialize EconomyProviderAPI
  * 2. Auto-detect an economy plugin
  * 3. Get a player's balance
  */
 
 declare(strict_types=1);
 
-namespace AxolotlBucketLabs\EcoAPIExample;
+namespace AxolotlBucketLabs\EconomyProviderAPIExample;
 
-use AxolotlBucketLabs\EcoAPI\EcoAPI;
-use AxolotlBucketLabs\EcoAPI\EconomyProvider;
+use AxolotlBucketLabs\EconomyProviderAPI\EconomyProviderAPI;
+use AxolotlBucketLabs\EconomyProviderAPI\EconomyProvider;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
@@ -27,11 +27,11 @@ class Main extends PluginBase implements Listener {
 	private EconomyProvider $economy;
 
 	public function onEnable(): void {
-		// Step 1: Initialize EcoAPI (call once, safe to call multiple times)
-		EcoAPI::init();
+		// Step 1: Initialize EconomyProviderAPI (call once, safe to call multiple times)
+		EconomyProviderAPI::init();
 
 		// Step 2: Auto-detect the installed economy plugin
-		$provider = EcoAPI::detectProvider();
+		$provider = EconomyProviderAPI::detectProvider();
 		if ($provider === null) {
 			$this->getLogger()->error("No economy plugin found! Install EconomyAPI, BedrockEconomy, or SimpleEconomy.");
 			$this->getServer()->getPluginManager()->disablePlugin($this);

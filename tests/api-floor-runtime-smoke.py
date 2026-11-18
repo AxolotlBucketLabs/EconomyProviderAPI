@@ -30,13 +30,13 @@ plugin_sha256 = hashlib.sha256(plugin.read_bytes()).hexdigest()
 if plugin_sha256 != expected_plugin_sha256:
     raise RuntimeError(f"Build output hash mismatch: expected {expected_plugin_sha256}, got {plugin_sha256}")
 
-with tempfile.TemporaryDirectory(prefix="ecoapi-api-floor-", dir=os.environ.get("RUNNER_TEMP")) as temporary:
+with tempfile.TemporaryDirectory(prefix="economyproviderapi-api-floor-", dir=os.environ.get("RUNNER_TEMP")) as temporary:
     root = Path(temporary)
     data = root / "data"
     plugins = root / "plugins"
     data.mkdir()
     plugins.mkdir()
-    shutil.copy2(plugin, plugins / "EcoAPIPlugin.phar")
+    shutil.copy2(plugin, plugins / "EconomyProviderAPIPlugin.phar")
     (data / "server.properties").write_text(
         "language=eng\nserver-ip=127.0.0.1\nserver-port=19145\nenable-ipv6=off\n"
         "enable-query=off\nxbox-auth=off\nlevel-type=FLAT\nview-distance=2\nmax-players=1\n",
@@ -70,7 +70,7 @@ with tempfile.TemporaryDirectory(prefix="ecoapi-api-floor-", dir=os.environ.get(
             deadline = time.monotonic() + 120
             while time.monotonic() < deadline and process.poll() is None:
                 content = log.read_text(encoding="utf-8", errors="replace")
-                if "Done (" in content and "Enabling EcoAPIPlugin v" in content:
+                if "Done (" in content and "Enabling EconomyProviderAPIPlugin v" in content:
                     break
                 if "/CRITICAL]:" in content or "/EMERGENCY]:" in content:
                     break
@@ -78,7 +78,7 @@ with tempfile.TemporaryDirectory(prefix="ecoapi-api-floor-", dir=os.environ.get(
 
             content = log.read_text(encoding="utf-8", errors="replace")
             ready = "Done (" in content
-            plugin_enabled = "Enabling EcoAPIPlugin v" in content and ready
+            plugin_enabled = "Enabling EconomyProviderAPIPlugin v" in content and ready
             if process.poll() is None and ready and plugin_enabled and process.stdin is not None:
                 process.stdin.write("stop\n")
                 process.stdin.flush()

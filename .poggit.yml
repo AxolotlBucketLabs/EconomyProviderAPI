@@ -3,13 +3,13 @@ build-by-default: true
 branches:
   - main
 projects:
-  EcoAPI:
+  EconomyProviderAPI:
     type: library
     model: virion
-  EcoAPIPlugin: []
-  EcoAPIExample:
+  EconomyProviderAPIPlugin: []
+  EconomyProviderAPIExample:
     path: example
     libs:
-      - src: AxolotlBucketLabs/EconomyProviderAPI/EcoAPI
-        version: ^2.0.0
+      - src: AxolotlBucketLabs/EconomyProviderAPI/EconomyProviderAPI
+        version: ^3.0.0
 ...

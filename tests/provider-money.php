@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EcoAPITest {
+namespace EconomyProviderAPITest {
 	final class PluginDescription {
 		public function __construct(private string $version) {
 		}
@@ -71,14 +71,14 @@ namespace pocketmine {
 	final class Server {
 		public static ?self $instance = null;
 
-		public function __construct(private \EcoAPITest\PluginManager $manager) {
+		public function __construct(private \EconomyProviderAPITest\PluginManager $manager) {
 		}
 
 		public static function getInstance(): self {
 			return self::$instance ?? throw new \RuntimeException("Test server is not initialized");
 		}
 
-		public function getPluginManager(): \EcoAPITest\PluginManager {
+		public function getPluginManager(): \EconomyProviderAPITest\PluginManager {
 			return $this->manager;
 		}
 	}
@@ -91,10 +91,10 @@ namespace pocketmine\event {
 
 namespace pocketmine\player {
 	final class Player {
-		public function __construct(private \EcoAPITest\ExperienceManager $manager) {
+		public function __construct(private \EconomyProviderAPITest\ExperienceManager $manager) {
 		}
 
-		public function getXpManager(): \EcoAPITest\ExperienceManager {
+		public function getXpManager(): \EconomyProviderAPITest\ExperienceManager {
 			return $this->manager;
 		}
 
@@ -109,7 +109,7 @@ namespace pocketmine\player {
 }
 
 namespace onebone\economyapi {
-	final class EconomyAPI extends \EcoAPITest\Plugin {
+	final class EconomyAPI extends \EconomyProviderAPITest\Plugin {
 		public const RET_SUCCESS = 1;
 		public const RET_CANCELLED = 2;
 		public static ?self $instance = null;
@@ -181,7 +181,7 @@ namespace AxolotlBucketLabs\SimpleEconomy {
 }
 
 namespace cooldogedev\BedrockEconomy {
-	final class BedrockEconomy extends \EcoAPITest\Plugin {
+	final class BedrockEconomy extends \EconomyProviderAPITest\Plugin {
 	}
 }
 
@@ -261,7 +261,7 @@ namespace cooldogedev\BedrockEconomy\api\type {
 		public ?array $lastAmount = null;
 		public ?string $lastOperation = null;
 		public int $calls = 0;
-		public ?\AxolotlBucketLabs\EcoAPI\provider\BedrockEconomyCancellationListener $cancellationListener = null;
+		public ?\AxolotlBucketLabs\EconomyProviderAPI\provider\BedrockEconomyCancellationListener $cancellationListener = null;
 		public bool $cancelNext = false;
 		public bool $cancelUnmatchedFirst = false;
 
@@ -321,29 +321,29 @@ namespace cooldogedev\BedrockEconomy\api\type {
 }
 
 namespace {
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/EconomyProvider.php";
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/BedrockEconomyCancellationListener.php";
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/XPProvider.php";
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/BedrockEconomyProvider.php";
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/EconomyAPIProvider.php";
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/SimpleEconomyProvider.php";
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/exception/MissingProviderDependencyException.php";
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/exception/UnknownProviderException.php";
-	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/EcoAPI.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/EconomyProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/provider/BedrockEconomyCancellationListener.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/provider/XPProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/provider/BedrockEconomyProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/provider/EconomyAPIProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/provider/SimpleEconomyProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/exception/MissingProviderDependencyException.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/exception/UnknownProviderException.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EconomyProviderAPI/EconomyProviderAPI.php";
 
 	use cooldogedev\BedrockEconomy\api\type\ClosureAPI;
 	use cooldogedev\BedrockEconomy\BedrockEconomy as BedrockBackend;
 	use cooldogedev\BedrockEconomy\currency\Currency;
 	use cooldogedev\BedrockEconomy\database\cache\CacheEntry;
 	use cooldogedev\BedrockEconomy\database\cache\GlobalCache;
-	use EcoAPITest\ExperienceManager;
-	use EcoAPITest\Plugin;
-	use EcoAPITest\PluginManager;
-	use AxolotlBucketLabs\EcoAPI\EcoAPI;
-	use AxolotlBucketLabs\EcoAPI\provider\BedrockEconomyProvider;
-	use AxolotlBucketLabs\EcoAPI\provider\EconomyAPIProvider;
-	use AxolotlBucketLabs\EcoAPI\provider\SimpleEconomyProvider;
-	use AxolotlBucketLabs\EcoAPI\provider\XPProvider;
+	use EconomyProviderAPITest\ExperienceManager;
+	use EconomyProviderAPITest\Plugin;
+	use EconomyProviderAPITest\PluginManager;
+	use AxolotlBucketLabs\EconomyProviderAPI\EconomyProviderAPI;
+	use AxolotlBucketLabs\EconomyProviderAPI\provider\BedrockEconomyProvider;
+	use AxolotlBucketLabs\EconomyProviderAPI\provider\EconomyAPIProvider;
+	use AxolotlBucketLabs\EconomyProviderAPI\provider\SimpleEconomyProvider;
+	use AxolotlBucketLabs\EconomyProviderAPI\provider\XPProvider;
 	use AxolotlBucketLabs\SimpleEconomy\Main as SimpleEconomy;
 	use onebone\economyapi\EconomyAPI as EconomyBackend;
 	use pocketmine\player\Player;
@@ -391,7 +391,7 @@ namespace {
 	$api = new ClosureAPI();
 	$reflection->getProperty("currency")->setValue($bedrock, $currency);
 	$reflection->getProperty("api")->setValue($bedrock, $api);
-	$listener = (new ReflectionClass(\AxolotlBucketLabs\EcoAPI\provider\BedrockEconomyCancellationListener::class))->newInstanceWithoutConstructor();
+	$listener = (new ReflectionClass(\AxolotlBucketLabs\EconomyProviderAPI\provider\BedrockEconomyCancellationListener::class))->newInstanceWithoutConstructor();
 	$reflection->getProperty("cancellationListener")->setValue($bedrock, $listener);
 	$api->cancellationListener = $listener;
 	$balance = null;
@@ -516,7 +516,7 @@ namespace {
 	try {
 		new SimpleEconomyProvider();
 		throw new RuntimeException("Uninitialized SimpleEconomy provider was constructed");
-	} catch (\AxolotlBucketLabs\EcoAPI\exception\MissingProviderDependencyException) {
+	} catch (\AxolotlBucketLabs\EconomyProviderAPI\exception\MissingProviderDependencyException) {
 	}
 	SimpleEconomy::$instance = $simpleEconomy;
 	$simpleEconomy->enabled = false;
@@ -524,12 +524,12 @@ namespace {
 	$simpleEconomy->enabled = true;
 	expect(SimpleEconomyProvider::isAvailable(), "Enabled initialized SimpleEconomy must be selectable");
 
-	EcoAPI::registerProvider(static fn(): XPProvider => new XPProvider(), static fn(): bool => true, "testxp", "xp-alias");
-	expect(EcoAPI::getProvider("XP-ALIAS") instanceof XPProvider, "Provider alias must resolve without dynamic class construction");
-	expect(EcoAPI::detectProvider() instanceof XPProvider, "Available custom provider must be detected");
-	expect(EcoAPI::getAvailableProviders() === ["testxp"], "Aliases must not duplicate available providers");
+	EconomyProviderAPI::registerProvider(static fn(): XPProvider => new XPProvider(), static fn(): bool => true, "testxp", "xp-alias");
+	expect(EconomyProviderAPI::getProvider("XP-ALIAS") instanceof XPProvider, "Provider alias must resolve without dynamic class construction");
+	expect(EconomyProviderAPI::detectProvider() instanceof XPProvider, "Available custom provider must be detected");
+	expect(EconomyProviderAPI::getAvailableProviders() === ["testxp"], "Aliases must not duplicate available providers");
 	$unavailableFactoryCalled = false;
-	EcoAPI::registerProvider(
+	EconomyProviderAPI::registerProvider(
 		static function () use (&$unavailableFactoryCalled): XPProvider {
 			$unavailableFactoryCalled = true;
 			return new XPProvider();
@@ -538,9 +538,9 @@ namespace {
 		"disabled"
 	);
 	try {
-		EcoAPI::getProvider("disabled");
+		EconomyProviderAPI::getProvider("disabled");
 		throw new RuntimeException("Unavailable provider was constructed");
-	} catch (\AxolotlBucketLabs\EcoAPI\exception\MissingProviderDependencyException) {
+	} catch (\AxolotlBucketLabs\EconomyProviderAPI\exception\MissingProviderDependencyException) {
 	}
 	expect(!$unavailableFactoryCalled, "Unavailable provider factory must not run");
 

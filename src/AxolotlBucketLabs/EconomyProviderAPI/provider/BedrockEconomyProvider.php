@@ -1,7 +1,7 @@
 <?php
 
 /*
- * EcoAPI - Simple and unified economy API for PocketMine-MP
+ * EconomyProviderAPI - Simple and unified economy API for PocketMine-MP
  *
  * Licensed under the Apache License, Version 2.0
  * https://www.apache.org/licenses/LICENSE-2.0
@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace AxolotlBucketLabs\EcoAPI\provider;
+namespace AxolotlBucketLabs\EconomyProviderAPI\provider;
 
 use Closure;
 use cooldogedev\BedrockEconomy\api\BedrockEconomyAPI;
@@ -18,7 +18,7 @@ use cooldogedev\BedrockEconomy\BedrockEconomy;
 use cooldogedev\BedrockEconomy\currency\Currency;
 use cooldogedev\BedrockEconomy\database\constant\UpdateMode;
 use cooldogedev\BedrockEconomy\database\cache\GlobalCache;
-use AxolotlBucketLabs\EcoAPI\EconomyProvider;
+use AxolotlBucketLabs\EconomyProviderAPI\EconomyProvider;
 use pocketmine\player\Player;
 use pocketmine\Server;
 

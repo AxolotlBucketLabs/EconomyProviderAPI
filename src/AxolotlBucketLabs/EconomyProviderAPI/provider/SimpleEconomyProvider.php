@@ -1,7 +1,7 @@
 <?php
 
 /*
- * EcoAPI - Simple and unified economy API for PocketMine-MP
+ * EconomyProviderAPI - Simple and unified economy API for PocketMine-MP
  *
  * Licensed under the Apache License, Version 2.0
  * https://www.apache.org/licenses/LICENSE-2.0
@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace AxolotlBucketLabs\EcoAPI\provider;
+namespace AxolotlBucketLabs\EconomyProviderAPI\provider;
 
 use Closure;
-use AxolotlBucketLabs\EcoAPI\EconomyProvider;
-use AxolotlBucketLabs\EcoAPI\exception\MissingProviderDependencyException;
+use AxolotlBucketLabs\EconomyProviderAPI\EconomyProvider;
+use AxolotlBucketLabs\EconomyProviderAPI\exception\MissingProviderDependencyException;
 use AxolotlBucketLabs\SimpleEconomy\Main as SimpleEconomy;
 use pocketmine\player\Player;
 use pocketmine\Server;

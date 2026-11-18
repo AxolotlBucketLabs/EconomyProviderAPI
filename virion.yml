@@ -1,6 +1,6 @@
-name: EcoAPI
-version: 2.0.0
-antigen: AxolotlBucketLabs\EcoAPI
+name: EconomyProviderAPI
+version: 3.0.0
+antigen: AxolotlBucketLabs\EconomyProviderAPI
 api: 5.0.0
 author: NhanAZ
 authors: [AxolotlBucketLabs]

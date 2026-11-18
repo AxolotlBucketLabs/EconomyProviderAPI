@@ -1,8 +1,8 @@
-name: EcoAPIExample
-version: 2.0.0
-main: AxolotlBucketLabs\EcoAPIExample\Main
+name: EconomyProviderAPIExample
+version: 3.0.0
+main: AxolotlBucketLabs\EconomyProviderAPIExample\Main
 api: 5.0.0
-description: Simple example plugin demonstrating EcoAPI usage
+description: Simple example plugin demonstrating EconomyProviderAPI usage
 author: NhanAZ
 authors: [AxolotlBucketLabs]
 softdepend: [EconomyAPI, BedrockEconomy, SimpleEconomy]
@@ -11,9 +11,9 @@ commands:
   balance:
     description: Check your balance
     usage: /balance
-    permission: ecoapiexample.balance
+    permission: economyproviderapiexample.balance
 
 permissions:
-  ecoapiexample.balance:
+  economyproviderapiexample.balance:
     default: true
     description: Allows checking your balance

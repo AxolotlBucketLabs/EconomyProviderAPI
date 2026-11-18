@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "AxolotlBucketLabs\\EcoAPI\\": "src/AxolotlBucketLabs/EcoAPI/"
+            "AxolotlBucketLabs\\EconomyProviderAPI\\": "src/AxolotlBucketLabs/EconomyProviderAPI/"
         }
     },
     "config": {
@@ -39,7 +39,7 @@
     "extra": {
         "virion": {
             "spec": "3.0",
-            "namespace-root": "AxolotlBucketLabs\\EcoAPI"
+            "namespace-root": "AxolotlBucketLabs\\EconomyProviderAPI"
         }
     }
 }
