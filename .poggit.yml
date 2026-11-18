@@ -1,4 +1,4 @@
---- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/NhanAZ/EcoAPI
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/AxolotlBucketLabs/EconomyProviderAPI
 build-by-default: true
 branches:
   - main
@@ -10,6 +10,6 @@ projects:
   EcoAPIExample:
     path: example
     libs:
-      - src: NhanAZ/EcoAPI/EcoAPI
-        version: ^1.0.0
+      - src: AxolotlBucketLabs/EconomyProviderAPI/EcoAPI
+        version: ^2.0.0
 ...

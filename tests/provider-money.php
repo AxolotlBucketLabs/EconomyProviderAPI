@@ -146,7 +146,7 @@ namespace onebone\economyapi {
 	}
 }
 
-namespace NhanAZ\SimpleEconomy {
+namespace AxolotlBucketLabs\SimpleEconomy {
 	final class Main {
 		public static ?self $instance = null;
 		public bool $enabled = true;
@@ -261,7 +261,7 @@ namespace cooldogedev\BedrockEconomy\api\type {
 		public ?array $lastAmount = null;
 		public ?string $lastOperation = null;
 		public int $calls = 0;
-		public ?\NhanAZ\EcoAPI\provider\BedrockEconomyCancellationListener $cancellationListener = null;
+		public ?\AxolotlBucketLabs\EcoAPI\provider\BedrockEconomyCancellationListener $cancellationListener = null;
 		public bool $cancelNext = false;
 		public bool $cancelUnmatchedFirst = false;
 
@@ -321,15 +321,15 @@ namespace cooldogedev\BedrockEconomy\api\type {
 }
 
 namespace {
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/EconomyProvider.php";
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/provider/BedrockEconomyCancellationListener.php";
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/provider/XPProvider.php";
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/provider/BedrockEconomyProvider.php";
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/provider/EconomyAPIProvider.php";
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/provider/SimpleEconomyProvider.php";
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/exception/MissingProviderDependencyException.php";
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/exception/UnknownProviderException.php";
-	require __DIR__ . "/../src/NhanAZ/EcoAPI/EcoAPI.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/EconomyProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/BedrockEconomyCancellationListener.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/XPProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/BedrockEconomyProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/EconomyAPIProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/provider/SimpleEconomyProvider.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/exception/MissingProviderDependencyException.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/exception/UnknownProviderException.php";
+	require __DIR__ . "/../src/AxolotlBucketLabs/EcoAPI/EcoAPI.php";
 
 	use cooldogedev\BedrockEconomy\api\type\ClosureAPI;
 	use cooldogedev\BedrockEconomy\BedrockEconomy as BedrockBackend;
@@ -339,12 +339,12 @@ namespace {
 	use EcoAPITest\ExperienceManager;
 	use EcoAPITest\Plugin;
 	use EcoAPITest\PluginManager;
-	use NhanAZ\EcoAPI\EcoAPI;
-	use NhanAZ\EcoAPI\provider\BedrockEconomyProvider;
-	use NhanAZ\EcoAPI\provider\EconomyAPIProvider;
-	use NhanAZ\EcoAPI\provider\SimpleEconomyProvider;
-	use NhanAZ\EcoAPI\provider\XPProvider;
-	use NhanAZ\SimpleEconomy\Main as SimpleEconomy;
+	use AxolotlBucketLabs\EcoAPI\EcoAPI;
+	use AxolotlBucketLabs\EcoAPI\provider\BedrockEconomyProvider;
+	use AxolotlBucketLabs\EcoAPI\provider\EconomyAPIProvider;
+	use AxolotlBucketLabs\EcoAPI\provider\SimpleEconomyProvider;
+	use AxolotlBucketLabs\EcoAPI\provider\XPProvider;
+	use AxolotlBucketLabs\SimpleEconomy\Main as SimpleEconomy;
 	use onebone\economyapi\EconomyAPI as EconomyBackend;
 	use pocketmine\player\Player;
 	use pocketmine\Server;
@@ -391,7 +391,7 @@ namespace {
 	$api = new ClosureAPI();
 	$reflection->getProperty("currency")->setValue($bedrock, $currency);
 	$reflection->getProperty("api")->setValue($bedrock, $api);
-	$listener = (new ReflectionClass(\NhanAZ\EcoAPI\provider\BedrockEconomyCancellationListener::class))->newInstanceWithoutConstructor();
+	$listener = (new ReflectionClass(\AxolotlBucketLabs\EcoAPI\provider\BedrockEconomyCancellationListener::class))->newInstanceWithoutConstructor();
 	$reflection->getProperty("cancellationListener")->setValue($bedrock, $listener);
 	$api->cancellationListener = $listener;
 	$balance = null;
@@ -516,7 +516,7 @@ namespace {
 	try {
 		new SimpleEconomyProvider();
 		throw new RuntimeException("Uninitialized SimpleEconomy provider was constructed");
-	} catch (\NhanAZ\EcoAPI\exception\MissingProviderDependencyException) {
+	} catch (\AxolotlBucketLabs\EcoAPI\exception\MissingProviderDependencyException) {
 	}
 	SimpleEconomy::$instance = $simpleEconomy;
 	$simpleEconomy->enabled = false;
@@ -540,7 +540,7 @@ namespace {
 	try {
 		EcoAPI::getProvider("disabled");
 		throw new RuntimeException("Unavailable provider was constructed");
-	} catch (\NhanAZ\EcoAPI\exception\MissingProviderDependencyException) {
+	} catch (\AxolotlBucketLabs\EcoAPI\exception\MissingProviderDependencyException) {
 	}
 	expect(!$unavailableFactoryCalled, "Unavailable provider factory must not run");
 

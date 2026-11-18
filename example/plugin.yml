@@ -1,9 +1,10 @@
 name: EcoAPIExample
-version: 1.0.0
-main: NhanAZ\EcoAPIExample\Main
+version: 2.0.0
+main: AxolotlBucketLabs\EcoAPIExample\Main
 api: 5.0.0
 description: Simple example plugin demonstrating EcoAPI usage
 author: NhanAZ
+authors: [AxolotlBucketLabs]
 softdepend: [EconomyAPI, BedrockEconomy, SimpleEconomy]
 
 commands:

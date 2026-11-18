@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPI\Plugin;
+namespace AxolotlBucketLabs\EcoAPI\Plugin;
 
 use pocketmine\plugin\PluginBase;
 
@@ -20,9 +20,9 @@ use pocketmine\plugin\PluginBase;
  * as a standalone plugin on the server. It does nothing by itself.
  *
  * You can use EcoAPI in two ways:
- * 1. As a virion (shade it into your plugin) — recommended
+ * 1. As a virion (shade it into your plugin) - recommended
  * 2. As a plugin (drop this .phar on the server)
  */
 class Main extends PluginBase {
-	// No-op — this plugin exists only to load the EcoAPI classes.
+	// No-op - this plugin exists only to load the EcoAPI classes.
 }

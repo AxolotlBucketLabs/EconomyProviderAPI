@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPI\provider;
+namespace AxolotlBucketLabs\EcoAPI\provider;
 
 use Closure;
-use NhanAZ\EcoAPI\EconomyProvider;
+use AxolotlBucketLabs\EcoAPI\EconomyProvider;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
 use pocketmine\Server;

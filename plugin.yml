@@ -1,6 +1,7 @@
 name: EcoAPIPlugin
-version: 1.0.0
-main: NhanAZ\EcoAPI\Plugin\Main
+version: 2.0.0
+main: AxolotlBucketLabs\EcoAPI\Plugin\Main
 api: 5.0.0
 description: Companion plugin for EcoAPI virion library
 author: NhanAZ
+authors: [AxolotlBucketLabs]

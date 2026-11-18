@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPI\provider;
+namespace AxolotlBucketLabs\EcoAPI\provider;
 
 use Closure;
-use NhanAZ\EcoAPI\EconomyProvider;
+use AxolotlBucketLabs\EcoAPI\EconomyProvider;
 use pocketmine\player\Player;
 
 /**
@@ -32,7 +32,7 @@ class XPProvider implements EconomyProvider {
 	}
 
 	public static function isAvailable(): bool {
-		return true; // Always available — XP is built into PocketMine-MP
+		return true; // Always available - XP is built into PocketMine-MP
 	}
 
 	public function getMoney(Player $player, Closure $callback): void {

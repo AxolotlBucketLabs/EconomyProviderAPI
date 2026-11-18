@@ -1,4 +1,4 @@
-name: Build and validate EcoAPI
+name: Build and validate EconomyProviderAPI
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   validate:
-    name: Analyze and build EcoAPI
+    name: Analyze and build EconomyProviderAPI
     runs-on: ubuntu-24.04
     steps:
       - name: Check out EcoAPI
@@ -38,8 +38,8 @@ jobs:
       - name: Check out pinned provider APIs
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: NhanAZ-Plugins/SimpleEconomy
-          ref: b715399a29b707a8ccdae559d48bbda2c37b7b49
+          repository: AxolotlBucketLabs/SimpleEconomy
+          ref: 72d87568ad8bf34cca286e94f005ab95ee4ee9c4
           path: .devtools-dependencies/SimpleEconomy
           persist-credentials: false
 
@@ -96,7 +96,7 @@ jobs:
 
       - name: Build verified companion plugin PHAR
         id: build
-        uses: AxolotlBucketLabs/DevTools@latest # v3.0.0
+        uses: AxolotlBucketLabs/DevTools@38076540e62b84a1016eda5345d394e8d4c50b28 # v4.1.0
         with:
           project: .
           output: build
@@ -114,7 +114,7 @@ jobs:
           BUILD_METADATA: ${{ steps.build.outputs.metadata }}
         run: |
           set -euo pipefail
-          php -r '$p=new Phar(getenv("PHAR_PATH")); foreach(["plugin.yml","LICENSE","src/NhanAZ/EcoAPI/EcoAPI.php","src/NhanAZ/EcoAPI/provider/XPProvider.php"] as $f){if(!$p->offsetExists($f)){throw new RuntimeException("Missing PHAR entry: ".$f);}} $m=json_decode(file_get_contents(getenv("BUILD_METADATA")),true,512,JSON_THROW_ON_ERROR); if(hash_file("sha256",getenv("PHAR_PATH"))!==$m["data"]["sha256"]){throw new RuntimeException("PHAR digest mismatch");}'
+          php -r '$p=new Phar(getenv("PHAR_PATH")); foreach(["plugin.yml","LICENSE","src/AxolotlBucketLabs/EcoAPI/EcoAPI.php","src/AxolotlBucketLabs/EcoAPI/provider/XPProvider.php"] as $f){if(!$p->offsetExists($f)){throw new RuntimeException("Missing PHAR entry: ".$f);}} $m=json_decode(file_get_contents(getenv("BUILD_METADATA")),true,512,JSON_THROW_ON_ERROR); if(hash_file("sha256",getenv("PHAR_PATH"))!==$m["data"]["sha256"]){throw new RuntimeException("PHAR digest mismatch");}'
           cp "$BUILD_METADATA" build/devtools-build.json
 
       - name: Prepare EcoAPI virion for consumer build
@@ -127,7 +127,7 @@ jobs:
 
       - name: Build example with shaded EcoAPI
         id: example-build
-        uses: AxolotlBucketLabs/DevTools@latest # v3.0.0
+        uses: AxolotlBucketLabs/DevTools@38076540e62b84a1016eda5345d394e8d4c50b28 # v4.1.0
         with:
           project: example
           virions: .devtools-virions

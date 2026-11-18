@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPIExample;
+namespace AxolotlBucketLabs\EcoAPIExample;
 
-use NhanAZ\EcoAPI\EcoAPI;
-use NhanAZ\EcoAPI\EconomyProvider;
+use AxolotlBucketLabs\EcoAPI\EcoAPI;
+use AxolotlBucketLabs\EcoAPI\EconomyProvider;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
@@ -58,7 +58,7 @@ class Main extends PluginBase implements Listener {
 	}
 
 	/**
-	 * /balance command — shows the player's current balance.
+	 * /balance command - shows the player's current balance.
 	 */
 	public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
 		if (!($sender instanceof Player)) {

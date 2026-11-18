@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPI\provider;
+namespace AxolotlBucketLabs\EcoAPI\provider;
 
 use Closure;
 use cooldogedev\BedrockEconomy\api\BedrockEconomyAPI;
@@ -18,7 +18,7 @@ use cooldogedev\BedrockEconomy\BedrockEconomy;
 use cooldogedev\BedrockEconomy\currency\Currency;
 use cooldogedev\BedrockEconomy\database\constant\UpdateMode;
 use cooldogedev\BedrockEconomy\database\cache\GlobalCache;
-use NhanAZ\EcoAPI\EconomyProvider;
+use AxolotlBucketLabs\EcoAPI\EconomyProvider;
 use pocketmine\player\Player;
 use pocketmine\Server;
 

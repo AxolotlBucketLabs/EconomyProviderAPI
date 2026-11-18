@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPI\provider;
+namespace AxolotlBucketLabs\EcoAPI\provider;
 
 use Closure;
-use NhanAZ\EcoAPI\EconomyProvider;
-use NhanAZ\EcoAPI\exception\MissingProviderDependencyException;
-use NhanAZ\SimpleEconomy\Main as SimpleEconomy;
+use AxolotlBucketLabs\EcoAPI\EconomyProvider;
+use AxolotlBucketLabs\EcoAPI\exception\MissingProviderDependencyException;
+use AxolotlBucketLabs\SimpleEconomy\Main as SimpleEconomy;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
 /**
- * Economy provider for NhanAZ/SimpleEconomy.
+ * Economy provider for AxolotlBucketLabs/SimpleEconomy.
  *
  * @see https://poggit.pmmp.io/p/SimpleEconomy
  */

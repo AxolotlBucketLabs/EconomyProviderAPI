@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPI;
+namespace AxolotlBucketLabs\EcoAPI;
 
 use Closure;
-use NhanAZ\EcoAPI\exception\MissingProviderDependencyException;
-use NhanAZ\EcoAPI\exception\UnknownProviderException;
-use NhanAZ\EcoAPI\provider\BedrockEconomyProvider;
-use NhanAZ\EcoAPI\provider\EconomyAPIProvider;
-use NhanAZ\EcoAPI\provider\SimpleEconomyProvider;
-use NhanAZ\EcoAPI\provider\XPProvider;
+use AxolotlBucketLabs\EcoAPI\exception\MissingProviderDependencyException;
+use AxolotlBucketLabs\EcoAPI\exception\UnknownProviderException;
+use AxolotlBucketLabs\EcoAPI\provider\BedrockEconomyProvider;
+use AxolotlBucketLabs\EcoAPI\provider\EconomyAPIProvider;
+use AxolotlBucketLabs\EcoAPI\provider\SimpleEconomyProvider;
+use AxolotlBucketLabs\EcoAPI\provider\XPProvider;
 use function spl_object_id;
 
 /**
@@ -43,7 +43,7 @@ final class EcoAPI {
 	/** Whether init() has been called. */
 	private static bool $initialized = false;
 
-	/** Prevent instantiation — all methods are static. */
+	/** Prevent instantiation - all methods are static. */
 	private function __construct() {
 	}
 
@@ -51,7 +51,7 @@ final class EcoAPI {
 	 * Initialize EcoAPI with built-in providers.
 	 *
 	 * Call this once in your plugin's onEnable().
-	 * Safe to call multiple times — subsequent calls are ignored.
+	 * Safe to call multiple times - subsequent calls are ignored.
 	 */
 	public static function init(): void {
 		if (self::$initialized) {

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPI;
+namespace AxolotlBucketLabs\EcoAPI;
 
 use Closure;
 use pocketmine\player\Player;

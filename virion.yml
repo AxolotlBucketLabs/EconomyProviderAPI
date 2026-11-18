@@ -1,5 +1,6 @@
 name: EcoAPI
-version: 1.0.0
-antigen: NhanAZ\EcoAPI
+version: 2.0.0
+antigen: AxolotlBucketLabs\EcoAPI
 api: 5.0.0
 author: NhanAZ
+authors: [AxolotlBucketLabs]

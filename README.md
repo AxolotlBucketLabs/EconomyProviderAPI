@@ -1,12 +1,17 @@
-# EcoAPI
+# EconomyProviderAPI
 
 Economy provider interface and DevTools virion for PocketMine-MP plugins
 
-[![CI](https://github.com/NhanAZ-Libraries/EcoAPI/actions/workflows/ci.yml/badge.svg)](https://github.com/NhanAZ-Libraries/EcoAPI/actions/workflows/ci.yml)
-[![Latest release](https://img.shields.io/github/v/release/NhanAZ-Libraries/EcoAPI)](https://github.com/NhanAZ-Libraries/EcoAPI/releases/latest)
-[![License](https://img.shields.io/github/license/NhanAZ-Libraries/EcoAPI)](https://github.com/NhanAZ-Libraries/EcoAPI/blob/main/LICENSE)
-[![Discord](https://img.shields.io/discord/986553214889517088?label=Discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/j2X83ujT6c)
+[![CI](https://github.com/AxolotlBucketLabs/EconomyProviderAPI/actions/workflows/ci.yml/badge.svg)](https://github.com/AxolotlBucketLabs/EconomyProviderAPI/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/AxolotlBucketLabs/EconomyProviderAPI)](https://github.com/AxolotlBucketLabs/EconomyProviderAPI/releases/latest)
+[![License](https://img.shields.io/github/license/AxolotlBucketLabs/EconomyProviderAPI)](https://github.com/AxolotlBucketLabs/EconomyProviderAPI/blob/main/LICENSE)
+[![Discord](https://img.shields.io/discord/1568295845374206052?label=Discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/Pk4FrNvHnM)
 
+EconomyProviderAPI provides the `EcoAPI` virion and its companion plugin for economy provider integrations.
+
+## Migration from 1.x
+
+Version 2.0.0 changes the Composer package and PHP namespace. Update Composer dependencies from `nhanaz/ecoapi` to `axolotlbucketlabs/economy-provider-api`, then change `NhanAZ\EcoAPI\` imports to `AxolotlBucketLabs\EcoAPI\`. The virion remains named `EcoAPI`.
 
 ## Compatibility and providers
 
@@ -16,16 +21,16 @@ Economy provider interface and DevTools virion for PocketMine-MP plugins
 |---|---|---|
 | [EconomyAPI](https://github.com/ACM-PocketMine-MP/EconomyAPI) | `economyapi`, `economy` | An enabled compatible EconomyAPI plugin |
 | [BedrockEconomy](https://github.com/cooldogepm/BedrockEconomy) | `bedrockeconomy`, `bedrock` | An enabled compatible BedrockEconomy plugin |
-| [SimpleEconomy](https://github.com/NhanAZ-Plugins/SimpleEconomy) | `simpleeconomy`, `simple` | An enabled SimpleEconomy plugin |
+| [SimpleEconomy](https://github.com/AxolotlBucketLabs/SimpleEconomy) | `simpleeconomy`, `simple` | An enabled SimpleEconomy plugin |
 | Player XP levels | `xp`, `exp`, `experience` | No economy plugin |
 
 EcoAPI checks availability when a provider is selected. Provider specific money operations have different storage and callback behavior. Test the selected provider with disposable balances before using it on a live server.
 
-An optional provider is available only after its plugin is enabled. A consumer that selects a provider in `onEnable()` should declare the desired plugin names under `softdepend` so they enable first. The example does this for EconomyAPI, BedrockEconomy and SimpleEconomy; when none is ready, it uses built-in XP.
+An optional provider is available only after its plugin is enabled. A consumer that selects a provider in `onEnable()` should declare the desired plugin names under `softdepend` so they enable first. The example does this for EconomyAPI, BedrockEconomy and SimpleEconomy. When none is ready, it uses built-in XP.
 
 The XP provider treats whole levels as currency. Setting, adding or taking levels keeps the player's progress within the current level. Its callback reports whether Axolotl-PM accepted the level change. An isolated server probe verified level and progress changes with a synthetic Player and the server's ExperienceManager. A connected test player then set 8 levels, added 2 and took 3 through EcoAPI. All three callbacks succeeded. The example read 7 levels before and after a clean server restart, and the test server saved a player data file. This test does not cover XP event cancellation, the Bedrock game UI or other server settings.
 
-SimpleEconomy stores whole units. Its adapter rejects fractional, non-finite, negative and out-of-range amounts; adding or taking money also requires an amount greater than zero. A successful callback reports that SimpleEconomy accepted the immediate in-memory change, while its SQL save continues asynchronously. Balance reads can return the configured default when a player's session has not loaded; that value is not proof of a persisted balance.
+SimpleEconomy stores whole units. Its adapter rejects fractional, non-finite, negative and out-of-range amounts. Adding or taking money also requires an amount greater than zero. A successful callback reports that SimpleEconomy accepted the immediate in-memory change, while its SQL save continues asynchronously. Balance reads can return the configured default when a player's session has not loaded. That value is not proof of a persisted balance.
 
 EconomyAPI rounds submitted amounts to two decimal places. Its adapter rejects non-finite, negative and subcent amounts before submission. Adding or taking money also requires a positive amount. A successful callback reports the backend return code, while persistence depends on the configured EconomyAPI provider. In an isolated YAML-backed test, a connected player set 42.25, added 8.10 and took 3.05 through EcoAPI. All callbacks succeeded. The example read 47.3 before and after a clean server restart, and `Money.yml` stored 47.3. This test does not cover EconomyAPI's MySQL provider, transaction cancellation or the Bedrock game UI.
 
@@ -33,7 +38,7 @@ The BedrockEconomy adapter accepts finite, nonnegative balances for `setMoney()`
 
 The tested BedrockEconomy 4.0.4 backend requires Xbox-authenticated player information. With Xbox authentication disabled, it throws during player login before EcoAPI can handle a transaction. Keep authentication enabled when using this provider. This requirement was reproduced on a PocketMine-MP runtime within the backend's published API range, but that attempt did not verify connected transactions or Axolotl-PM compatibility.
 
-In BedrockEconomy 4.0.4, a listener can cancel `TransactionSubmitEvent` before the database operation starts. EcoAPI observes matching canceled updates and reports `false` to the supplied callback exactly once. An isolated PocketMine-MP 5.36.0 server probe used the EcoAPI plugin PHAR from [CI run 38445425063](https://github.com/NhanAZ-Libraries/EcoAPI/actions/runs/38445425063), built from commit `83277ab`. With a synthetic `Player`, the probe canceled `setMoney()`, `addMoney()` and `takeMoney()`; all three events were canceled, each callback ran once with `false`, and the server exited with code `0`. A separate Axolotl-PM 5.49.1 probe confirmed that a canceled `setMoney()` call left the cache and SQLite balance unchanged. These tests do not verify connected-player behavior or persisted balances for canceled `addMoney()` and `takeMoney()` calls.
+In BedrockEconomy 4.0.4, a listener can cancel `TransactionSubmitEvent` before the database operation starts. EcoAPI observes matching canceled updates and reports `false` to the supplied callback exactly once. An isolated PocketMine-MP 5.36.0 server probe used the EcoAPI plugin PHAR from [CI run 38445425063](https://github.com/AxolotlBucketLabs/EconomyProviderAPI/actions/runs/38445425063), built from commit `83277ab`. With a synthetic `Player`, the probe canceled `setMoney()`, `addMoney()` and `takeMoney()`. All three events were canceled, each callback ran once with `false`, and the server exited with code `0`. A separate Axolotl-PM 5.49.1 probe confirmed that a canceled `setMoney()` call left the cache and SQLite balance unchanged. These tests do not verify connected-player behavior or persisted balances for canceled `addMoney()` and `takeMoney()` calls.
 
 ## Installation and building
 
@@ -42,17 +47,17 @@ For a source based plugin, place a pinned EcoAPI source checkout under `virions/
 ```yaml
 virions:
   - name: EcoAPI
-    version: ^1.0.0
+    version: ^2.0.0
 ```
 
-The [`example/`](example/) directory contains this declaration. [DevTools](https://github.com/NhanAZ/DevTools) builds the consumer PHAR and shades the EcoAPI namespace. Pin the source revision and follow the [DevTools build guide](https://github.com/NhanAZ/DevTools/blob/main/docs/github-actions.md) for reproducible builds. The repository workflow builds and validates the companion `EcoAPIPlugin` and shaded example PHARs, then uploads them after its checks pass. An artifact is not a stable release.
+The [`example/`](example/) directory contains this declaration. [DevTools](https://github.com/AxolotlBucketLabs/DevTools) builds the consumer PHAR and shades the EcoAPI namespace. Pin the source revision and follow the [DevTools build guide](https://github.com/AxolotlBucketLabs/DevTools/blob/main/docs/github-actions.md) for reproducible builds. The repository workflow builds and validates the companion `EcoAPIPlugin` and shaded example PHARs, then uploads them after its checks pass. An artifact is not a stable release.
 
 ## Basic usage
 
 Call `EcoAPI::init()` during your plugin's enable phase, then choose an available provider:
 
 ```php
-use NhanAZ\EcoAPI\EcoAPI;
+use AxolotlBucketLabs\EcoAPI\EcoAPI;
 
 EcoAPI::init();
 $provider = EcoAPI::detectProvider();
@@ -71,11 +76,11 @@ EcoAPI does not provide an atomic transfer between two accounts. Do not implemen
 
 ## Custom providers
 
-Implement [`EconomyProvider`](src/NhanAZ/EcoAPI/EconomyProvider.php) and register explicit factory and availability callbacks:
+Implement [`EconomyProvider`](src/AxolotlBucketLabs/EcoAPI/EconomyProvider.php) and register explicit factory and availability callbacks:
 
 ```php
-use NhanAZ\EcoAPI\EcoAPI;
-use NhanAZ\EcoAPI\EconomyProvider;
+use AxolotlBucketLabs\EcoAPI\EcoAPI;
+use AxolotlBucketLabs\EcoAPI\EconomyProvider;
 
 EcoAPI::registerProvider(
     static fn(): EconomyProvider => new MyProvider(),
@@ -90,4 +95,4 @@ This registration signature replaces the older class string argument before the 
 
 The repository runs [PHPStan at maximum level](phpstan.neon.dist), PHP lint and provider behavior fixtures. Its workflow pins checkout, server setup, DevTools and artifact upload revisions. CI builds and validates the companion PHAR and a shaded consumer example. Isolated server probes exercised SimpleEconomy and BedrockEconomy 4.0.4 transactions with synthetic player objects, then checked persisted SQLite balances. Scoped SQLite triggers rejected `setMoney()`, `addMoney()` and `takeMoney()` updates on test accounts. Each callback reported failure, and the cached and persisted balances stayed unchanged. A separate EconomyAPI 6.0.0-PM5 probe checked callbacks and the YAML balance after shutdown. A connected headless client received the example's join message and `/balance` result through SimpleEconomy. A disposable test plugin also called EcoAPI's `addMoney()`, `takeMoney()` and `setMoney()` methods for a second connected player. All three callbacks succeeded, the client saw the final balance of 1,100 and SQLite retained that balance after shutdown. A separate connected XP probe set, added and took levels. The example read 7 levels before and after restart. Another connected test exercised the EconomyAPI YAML provider with cents and read 47.3 before and after restart. Bedrock game UI, connected BedrockEconomy behavior, other backend settings and other database failure paths remain unverified.
 
-Keep player data backups and a previously verified build during upgrades. For support, use [NhanAZ Discord](https://discord.gg/j2X83ujT6c). See the [LICENSE](LICENSE) file for the full Apache License 2.0 text.
+Keep player data backups and a previously verified build during upgrades. For support, use [AxolotlBucketLabs Discord](https://discord.gg/Pk4FrNvHnM). See the [LICENSE](LICENSE) file for the full Apache License 2.0 text.

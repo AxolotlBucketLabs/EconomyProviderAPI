@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace NhanAZ\EcoAPI\exception;
+namespace AxolotlBucketLabs\EcoAPI\exception;
 
 use RuntimeException;
 

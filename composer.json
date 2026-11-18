@@ -1,5 +1,5 @@
 {
-    "name": "nhanaz/ecoapi",
+    "name": "axolotlbucketlabs/economy-provider-api",
     "description": "Simple and unified economy API library for PocketMine-MP plugins",
     "type": "library",
     "license": "Apache-2.0",
@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NhanAZ\\EcoAPI\\": "src/NhanAZ/EcoAPI/"
+            "AxolotlBucketLabs\\EcoAPI\\": "src/AxolotlBucketLabs/EcoAPI/"
         }
     },
     "config": {
@@ -39,7 +39,7 @@
     "extra": {
         "virion": {
             "spec": "3.0",
-            "namespace-root": "NhanAZ\\EcoAPI"
+            "namespace-root": "AxolotlBucketLabs\\EcoAPI"
         }
     }
 }
