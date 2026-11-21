@@ -96,7 +96,7 @@ jobs:
 
       - name: Build verified companion plugin PHAR
         id: build
-        uses: AxolotlBucketLabs/DevTools@38076540e62b84a1016eda5345d394e8d4c50b28 # v4.1.0
+        uses: AxolotlBucketLabs/DevTools@c2eb715205a9dcb485a4ecabd17512f32f24d5d7 # v4.1.1
         with:
           project: .
           output: build
@@ -127,7 +127,7 @@ jobs:
 
       - name: Build example with shaded EconomyProviderAPI
         id: example-build
-        uses: AxolotlBucketLabs/DevTools@38076540e62b84a1016eda5345d394e8d4c50b28 # v4.1.0
+        uses: AxolotlBucketLabs/DevTools@c2eb715205a9dcb485a4ecabd17512f32f24d5d7 # v4.1.1
         with:
           project: example
           virions: .devtools-virions
